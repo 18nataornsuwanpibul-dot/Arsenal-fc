@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="th" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arsenal FC - The Gunners | Fan Site by ด.ญ.ณฐอร สุวรรณพิบูลย์</title>
+    
+    <!-- โหลด Tailwind CSS สำหรับจัดการ Layout และ Responsive Design -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- โหลด Google Fonts: Prompt และ Kanit สำหรับภาษาไทยที่สวยงามทันสมัย และ Oswald สำหรับหัวข้อสไตล์กีฬา -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&family=Oswald:wght@600;700&family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- โหลด Font Awesome สำหรับไอคอนสวยงาม -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- ตั้งค่า Custom Colors และ Fonts ใน Tailwind -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        arsenalRed: '#EF0107',
+                        arsenalDarkRed: '#800000',
+                        arsenalGold: '#D4AF37',
+                        arsenalBronze: '#9C824A',
+                        arsenalNavy: '#063672',
+                        arsenalDark: '#111827'
+                    },
+                    fontFamily: {
+                        sans: ['Prompt', 'Kanit', 'sans-serif'],
+                        display: ['Oswald', 'Prompt', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Custom CSS เพิ่มเติมสำหรับเอฟเฟกต์และแอนิเมชัน -->
+    <style>
+        /* ป้องกันการเลื่อนแนวนอนบนมือถือ */
+        body {
+            overflow-x: hidden;
+            font-family: 'Prompt', sans-serif;
+        }
+
+        /* พื้นหลัง Hero แบบ Gradient ผสมลวดลายทันสมัย */
+        .hero-bg {
+            background: linear-gradient(135deg, rgba(128, 0, 0, 0.94) 0%, rgba(239, 1, 7, 0.88) 55%, rgba(17, 24, 39, 0.96) 100%),
+                        url('https://images.unsplash.com/photo-1522778119026-d647f0596c20?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+        }
+
+        /* เอฟเฟกต์ Hover การ์ดนักเตะและถ้วยรางวัล */
+        .gunner-card {
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .gunner-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(239, 1, 7, 0.15), 0 10px 10px -5px rgba(0, 0, 0, 0.08);
+        }
+
+        /* เส้นใต้เมนูแบบเคลื่อนไหว */
+        .nav-link {
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: #D4AF37;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        /* ตกแต่ง Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #EF0107;
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #800000;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 antialiased selection:bg-arsenalRed selection:text-white">
+
+    <!-- ==================== 1. แถบเมนูนำทาง (Sticky Navigation Bar) ==================== -->
+    <header id="navbar" class="fixed top-0 left-0 right-0 z-50 bg-arsenalRed/95 backdrop-blur-md text-white shadow-lg border-b-2 border-arsenalGold transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                
+                <!-- โลโก้สโมสรอาร์เซนอล (สร้างด้วย SVG ปืนใหญ่และโล่สัญลักษณ์) -->
+                <a href="#home" class="flex items-center space-x-3 group focus:outline-none">
+                    <div class="w-12 h-12 bg-white rounded-full p-1.5 shadow-md flex items-center justify-center border-2 border-arsenalGold group-hover:scale-105 transition-transform">
+                        <!-- SVG โลโก้ปืนใหญ่ Arsenal -->
+                        <svg viewBox="0 0 100 100" class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M50 5 L90 22 V52 C90 76 50 95 50 95 C50 95 10 76 10 52 V22 L50 5 Z" fill="#EF0107" stroke="#D4AF37" stroke-width="5"/>
+                            <!-- ล้อปืนใหญ่ -->
+                            <circle cx="42" cy="62" r="11" fill="none" stroke="#FFFFFF" stroke-width="3.5"/>
+                            <circle cx="42" cy="62" r="3" fill="#D4AF37"/>
+                            <!-- ลำกล้องปืนใหญ่ -->
+                            <path d="M25 58 L78 44 L80 51 L27 65 Z" fill="#D4AF37"/>
+                            <rect x="20" y="57" width="8" height="9" rx="2" fill="#FFFFFF"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <span class="font-display text-2xl font-bold tracking-wider uppercase block leading-none">ARSENAL FC</span>
+                        <span class="text-xs text-arsenalGold font-medium tracking-widest uppercase">The Gunners • Est. 1886</span>
+                    </div>
+                </a>
+
+                <!-- เมนูสำหรับหน้าจอ Desktop -->
+                <nav class="hidden md:flex items-center space-x-7 font-medium text-sm lg:text-base">
+                    <a href="#home" class="nav-link hover:text-arsenalGold transition-colors py-1">หน้าแรก</a>
+                    <a href="#history" class="nav-link hover:text-arsenalGold transition-colors py-1">ประวัติสโมสร</a>
+                    <a href="#stadium" class="nav-link hover:text-arsenalGold transition-colors py-1">สนามเหย้า</a>
+                    <a href="#players" class="nav-link hover:text-arsenalGold transition-colors py-1">นักเตะดาวเด่น</a>
+                    <a href="#developer" class="bg-white text-arsenalRed hover:bg-arsenalGold hover:text-arsenalDark px-4 py-2 rounded-full font-semibold shadow-md transition-all duration-300 flex items-center gap-2">
+                        <i class="fas fa-user-circle"></i>
+                        <span>ติดต่อผู้พัฒนา</span>
+                    </a>
+                </nav>
+
+                <!-- ปุ่ม Hamburger Menu สำหรับมือถือและแท็บเล็ต -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" aria-label="เปิดเมนูนำทาง" class="text-white hover:text-arsenalGold focus:outline-none p-2.5 rounded-lg bg-arsenalDarkRed/50 border border-white/20">
+                        <i id="menu-icon" class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- เมนู Dropdown สำหรับหน้าจอมือถือ (Mobile Navigation) -->
+        <div id="mobile-menu" class="hidden md:hidden bg-arsenalDarkRed border-t border-arsenalGold/40 shadow-2xl">
+            <div class="px-4 pt-3 pb-6 space-y-2">
+                <a href="#home" class="mobile-nav-link block px-4 py-3 rounded-xl text-base font-medium hover:bg-arsenalRed transition-colors flex items-center gap-3">
+                    <i class="fas fa-home w-5 text-arsenalGold"></i> หน้าแรก
+                </a>
+                <a href="#history" class="mobile-nav-link block px-4 py-3 rounded-xl text-base font-medium hover:bg-arsenalRed transition-colors flex items-center gap-3">
+                    <i class="fas fa-trophy w-5 text-arsenalGold"></i> ประวัติสโมสร & เกียรติประวัติ
+                </a>
+                <a href="#stadium" class="mobile-nav-link block px-4 py-3 rounded-xl text-base font-medium hover:bg-arsenalRed transition-colors flex items-center gap-3">
+                    <i class="fas fa-futbol w-5 text-arsenalGold"></i> สนามเหย้า Emirates Stadium
+                </a>
+                <a href="#players" class="mobile-nav-link block px-4 py-3 rounded-xl text-base font-medium hover:bg-arsenalRed transition-colors flex items-center gap-3">
+                    <i class="fas fa-users w-5 text-arsenalGold"></i> นักเตะดาวเด่น
+                </a>
+                <a href="#developer" class="mobile-nav-link block px-4 py-3 mt-3 rounded-xl text-base font-semibold bg-arsenalGold text-arsenalDark text-center shadow-md">
+                    <i class="fas fa-heart mr-2 text-arsenalRed"></i> ติดต่อผู้พัฒนาเว็บไซต์
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- ==================== 2. ส่วนต้อนรับ (Hero Section) ==================== -->
+    <section id="home" class="hero-bg min-h-screen flex items-center pt-24 pb-16 text-white relative overflow-hidden">
+        <!-- องค์ประกอบตกแต่งพื้นหลัง -->
+        <div class="absolute top-20 right-10 w-72 h-72 bg-arsenalGold/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute bottom-10 left-10 w-96 h-96 bg-arsenalRed/20 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- ข้อความหลักด้านซ้าย -->
+                <div class="lg:col-span-7 text-center lg:text-left space-y-6">
+                    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-sm border border-arsenalGold/60 text-arsenalGold text-sm font-semibold tracking-wide">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>NORTH LONDON IS RED • THE GUNNERS</span>
+                    </div>
+
+                    <h1 class="font-display text-5xl sm:text-6xl lg:text-7xl font-bold uppercase tracking-tight leading-tight">
+                        ARSENAL <span class="text-arsenalGold">FOOTBALL</span> CLUB
+                    </h1>
+
+                    <p class="text-xl sm:text-2xl font-light italic text-gray-200 border-l-4 border-arsenalGold pl-4 mx-auto lg:mx-0 max-w-xl">
+                        "Victoria Concordia Crescit" <br>
+                        <span class="text-base not-italic text-gray-300">ชัยชนะเกิดขึ้นจากความสามัคคีเป็นหนึ่งเดียว</span>
+                    </p>
+
+                    <p class="text-gray-200 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto lg:mx-0">
+                        ยินดีต้อนรับสู่เว็บไซต์รวบรวมเรื่องราวความยิ่งใหญ่ของสโมสรฟุตบอล <strong class="text-white">อาร์เซนอล (The Gunners)</strong> ทีมระดับตำนานแห่งกรุงลอนดอน เจ้าของสถิติแชมป์พรีเมียร์ลีกไร้พ่าย (The Invincibles) และสไตล์การเล่นที่สวยงามเร้าใจ
+                    </p>
+
+                    <!-- ปุ่ม Call-to-Action -->
+                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
+                        <a href="#history" class="w-full sm:w-auto px-8 py-4 rounded-full bg-arsenalGold text-arsenalDark font-bold text-base shadow-xl hover:bg-white hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2">
+                            <span>สำรวจประวัติสโมสร</span>
+                            <i class="fas fa-arrow-down"></i>
+                        </a>
+                        <a href="#players" class="w-full sm:w-auto px-8 py-4 rounded-full bg-white/15 hover:bg-white/25 backdrop-blur-md border border-white/40 text-white font-semibold text-base transition-all duration-300 flex items-center justify-center gap-2">
+                            <i class="fas fa-star text-arsenalGold"></i>
+                            <span>ดูขุมกำลังนักเตะ</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- การ์ดสถิติเด่นด้านขวา -->
+                <div class="lg:col-span-5">
+                    <div class="bg-white/10 backdrop-blur-md border border-white/20 rounded-3xl p-6 sm:p-8 shadow-2xl">
+                        <div class="flex items-center justify-between border-b border-white/20 pb-4 mb-6">
+                            <div>
+                                <span class="text-xs uppercase tracking-widest text-arsenalGold font-semibold">Club Identity</span>
+                                <h2 class="text-2xl font-bold text-white">ข้อมูลสำคัญของสโมสร</h2>
+                            </div>
+                            <span class="w-12 h-12 rounded-2xl bg-arsenalRed flex items-center justify-center border border-arsenalGold shadow-inner">
+                                <i class="fas fa-crown text-arsenalGold text-xl"></i>
+                            </span>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="bg-arsenalDark/50 p-4 rounded-2xl border border-white/10">
+                                <p class="text-xs text-gray-300">ก่อตั้งเมื่อปี</p>
+                                <p class="font-display text-3xl font-bold text-arsenalGold mt-1">1886</p>
+                                <p class="text-xs text-gray-400 mt-1">ย่านวูลวิช, ลอนดอน</p>
+                            </div>
+                            <div class="bg-arsenalDark/50 p-4 rounded-2xl border border-white/10">
+                                <p class="text-xs text-gray-300">ฉายาประจำทีม</p>
+                                <p class="font-display text-2xl sm:text-3xl font-bold text-white mt-1">The Gunners</p>
+                                <p class="text-xs text-gray-400 mt-1">ไอ้ปืนใหญ่</p>
+                            </div>
+                            <div class="bg-arsenalDark/50 p-4 rounded-2xl border border-white/10">
+                                <p class="text-xs text-gray-300">แชมป์ลีกสูงสุด</p>
+                                <p class="font-display text-3xl font-bold text-arsenalGold mt-1">13 สมัย</p>
+                                <p class="text-xs text-gray-400 mt-1">รวมไร้พ่าย 2003/04</p>
+                            </div>
+                            <div class="bg-arsenalDark/50 p-4 rounded-2xl border border-white/10">
+                                <p class="text-xs text-gray-300">แชมป์ FA Cup</p>
+                                <p class="font-display text-3xl font-bold text-white mt-1">14 สมัย</p>
+                                <p class="text-xs text-arsenalGold mt-1">สูงสุดตลอดกาล!</p>
+                            </div>
+                        </div>
+
+                        <div class="mt-6 pt-4 border-t border-white/20 flex items-center justify-between text-sm text-gray-200">
+                            <span><i class="fas fa-map-marker-alt text-arsenalGold mr-1.5"></i> ลอนดอน, ประเทศอังกฤษ</span>
+                            <span class="font-semibold text-arsenalGold">#COYG</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== 3. ส่วนประวัติและเกียรติประวัติของสโมสร (Club History & Trophies) ==================== -->
+    <section id="history" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <!-- หัวข้อ Section -->
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-arsenalRed font-bold tracking-widest uppercase text-sm">Heritage & Glory</span>
+                <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mt-2">ประวัติศาสตร์และเกียรติประวัติของสโมสร</h2>
+                <div class="w-24 h-1.5 bg-gradient-to-r from-arsenalRed via-arsenalGold to-arsenalDarkRed mx-auto mt-4 rounded-full"></div>
+                <p class="text-gray-600 mt-4 text-base sm:text-lg">
+                    จากจุดเริ่มต้นของกลุ่มคนงานโรงงานผลิตอาวุธในย่านวูลวิช สู่การเป็นหนึ่งในสโมสรฟุตบอลที่ยิ่งใหญ่และมีเอกลักษณ์ที่สุดในโลก
+                </p>
+            </div>
+
+            <!-- Timeline ประวัติศาสตร์ 3 ยุคสำคัญ -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+                <!-- ยุคที่ 1 -->
+                <div class="gunner-card bg-gray-50 rounded-3xl p-8 border border-gray-200 relative overflow-hidden">
+                    <div class="w-14 h-14 rounded-2xl bg-arsenalRed text-white flex items-center justify-center font-display text-xl font-bold mb-6 shadow-md">
+                        1886
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">จุดกำเนิด Dial Square</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">
+                        ก่อตั้งขึ้นในปี ค.ศ. 1886 โดยกลุ่มคนงานโรงงานผลิตอาวุธ Royal Arsenal ในชื่อ "Dial Square" ก่อนเปลี่ยนชื่อเป็น Woolwich Arsenal และย้ายสู่สนามไฮบิวรี (Highbury) ทางตอนเหนือของลอนดอนในปี 1913
+                    </p>
+                </div>
+
+                <!-- ยุคที่ 2 -->
+                <div class="gunner-card bg-gray-50 rounded-3xl p-8 border-2 border-arsenalGold relative overflow-hidden shadow-md">
+                    <div class="w-14 h-14 rounded-2xl bg-arsenalGold text-arsenalDark flex items-center justify-center font-display text-xl font-bold mb-6 shadow-md">
+                        2004
+                    </div>
+                    <span class="inline-block px-3 py-1 bg-arsenalRed/10 text-arsenalRed text-xs font-bold rounded-full mb-2">ตำนานไร้พ่าย</span>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">ยุคทอง อาร์แซน เวนเกอร์</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">
+                        ภายใต้การคุมทีมของกุนซือระดับตำนาน อาร์แซน เวนเกอร์ อาร์เซนอลสร้างประวัติศาสตร์คว้าแชมป์พรีเมียร์ลีกฤดูกาล 2003/04 แบบ <strong>"ไร้พ่ายตลอด 38 นัด"</strong> จนได้รับถ้วยแชมป์พรีเมียร์ลีกทองคำเพียงทีมเดียวในอังกฤษ
+                    </p>
+                </div>
+
+                <!-- ยุคที่ 3 -->
+                <div class="gunner-card bg-gray-50 rounded-3xl p-8 border border-gray-200 relative overflow-hidden">
+                    <div class="w-14 h-14 rounded-2xl bg-arsenalDarkRed text-white flex items-center justify-center font-display text-xl font-bold mb-6 shadow-md">
+                        ยุคใหม่
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">พลังหนุ่มยุค มิเกล อาร์เตตา</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">
+                        อดีตกัปตันทีม มิเกล อาร์เตตา ปลุกจิตวิญญาณไอ้ปืนใหญ่ให้กลับมาดุดันและทันสมัย ด้วยขุมกำลังนักเตะสายเลือดใหม่ที่เต็มไปด้วยพรสวรรค์และความกระหายในชัยชนะ เพื่อทวงคืนความยิ่งใหญ่บนเวทียุโรป
+                    </p>
+                </div>
+            </div>
+
+            <!-- ตู้โชว์ถ้วยรางวัล (Trophy Cabinet) -->
+            <div class="bg-gradient-to-r from-arsenalDarkRed via-arsenalRed to-arsenalDarkRed rounded-3xl p-8 sm:p-10 text-white shadow-xl border-2 border-arsenalGold">
+                <div class="text-center mb-8">
+                    <h3 class="text-2xl sm:text-3xl font-bold flex items-center justify-center gap-3">
+                        <i class="fas fa-trophy text-arsenalGold"></i>
+                        <span>ทำเนียบแชมป์สำคัญ (Trophy Cabinet)</span>
+                    </h3>
+                </div>
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-6 text-center">
+                    <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-5 border border-white/15">
+                        <i class="fas fa-medal text-3xl text-arsenalGold mb-2"></i>
+                        <div class="font-display text-4xl font-bold text-white">13</div>
+                        <div class="text-sm font-medium text-arsenalGold mt-1">แชมป์ลีกสูงสุดอังกฤษ</div>
+                        <div class="text-xs text-gray-200 mt-0.5">First Division / Premier League</div>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-5 border border-white/15">
+                        <i class="fas fa-trophy text-3xl text-arsenalGold mb-2"></i>
+                        <div class="font-display text-4xl font-bold text-white">14</div>
+                        <div class="text-sm font-medium text-arsenalGold mt-1">แชมป์ FA Cup</div>
+                        <div class="text-xs text-gray-200 mt-0.5">สถิติสูงสุดของประเทศ</div>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-5 border border-white/15">
+                        <i class="fas fa-shield-alt text-3xl text-arsenalGold mb-2"></i>
+                        <div class="font-display text-4xl font-bold text-white">17</div>
+                        <div class="text-sm font-medium text-arsenalGold mt-1">Community Shield</div>
+                        <div class="text-xs text-gray-200 mt-0.5">โล่การกุศลอังกฤษ</div>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-5 border border-white/15">
+                        <i class="fas fa-award text-3xl text-arsenalGold mb-2"></i>
+                        <div class="font-display text-4xl font-bold text-white">2</div>
+                        <div class="text-sm font-medium text-arsenalGold mt-1">League Cup & European</div>
+                        <div class="text-xs text-gray-200 mt-0.5">Cup Winners' Cup 1994</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ==================== 4. ส่วนสนามเหย้า Emirates Stadium ==================== -->
+    <section id="stadium" class="py-20 bg-gray-100 border-y border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- ภาพประกอบสนาม Emirates Stadium -->
+                <div class="lg:col-span-6">
+                    <div class="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white group">
+                        <img src="https://images.unsplash.com/photo-1577223625816-7546f13df25d?auto=format&fit=crop&w=1200&q=80" 
+                             onerror="this.onerror=null;this.src='https://placehold.co/800x550/EF0107/FFFFFF?text=Emirates+Stadium+-+Home+of+Arsenal';"
+                             alt="สนามเหย้า Emirates Stadium ของสโมสรอาร์เซนอล" 
+                             class="w-full h-80 sm:h-96 object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                        <div class="absolute bottom-5 left-6 right-6 text-white flex items-end justify-between">
+                            <div>
+                                <span class="px-3 py-1 bg-arsenalRed text-xs font-bold uppercase rounded-full">Home Ground</span>
+                                <h3 class="text-2xl font-bold mt-2">Emirates Stadium</h3>
+                                <p class="text-xs text-gray-300">Ashburton Grove, Holloway, London</p>
+                            </div>
+                            <div class="bg-arsenalGold text-arsenalDark font-bold px-3 py-1.5 rounded-xl text-sm">
+                                60,704 ที่นั่ง
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- รายละเอียดสนามเหย้า -->
+                <div class="lg:col-span-6 space-y-6">
+                    <div>
+                        <span class="text-arsenalRed font-bold tracking-widest uppercase text-sm">The Fortress</span>
+                        <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mt-1">เอมิเรตส์ สเตเดียม (Emirates Stadium)</h2>
+                    </div>
+
+                    <p class="text-gray-600 leading-relaxed text-base">
+                        <strong>เอมิเรตส์ สเตเดียม</strong> คือรังเหย้าอันยิ่งใหญ่และทันสมัยของสโมสรฟุตบอลอาร์เซนอล เปิดใช้งานอย่างเป็นทางการในเดือนกรกฎาคม ปี ค.ศ. 2006 เพื่อทดแทนสนามไฮบิวรี (Highbury) อันเป็นตำนาน ตั้งอยู่ในย่านฮอลโลเวย์ ทางตอนเหนือของกรุงลอนดอน
+                    </p>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+                        <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-200 flex items-start gap-3">
+                            <div class="w-10 h-10 rounded-xl bg-arsenalRed/10 text-arsenalRed flex items-center justify-center shrink-0 mt-0.5">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-900">ความจุผู้ชม</h4>
+                                <p class="text-sm text-gray-600">60,704 ที่นั่ง (ใหญ่เป็นอันดับ 5 ในอังกฤษ)</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-200 flex items-start gap-3">
+                            <div class="w-10 h-10 rounded-xl bg-arsenalGold/20 text-arsenalDarkRed flex items-center justify-center shrink-0 mt-0.5">
+                                <i class="fas fa-calendar-check"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-900">ปีที่เปิดใช้งาน</h4>
+                                <p class="text-sm text-gray-600">กรกฎาคม ค.ศ. 2006 (มูลค่า 390 ล้านปอนด์)</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-200 flex items-start gap-3">
+                            <div class="w-10 h-10 rounded-xl bg-arsenalRed/10 text-arsenalRed flex items-center justify-center shrink-0 mt-0.5">
+                                <i class="fas fa-ruler-combined"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-900">ขนาดพื้นสนาม</h4>
+                                <p class="text-sm text-gray-600">105 × 68 เมตร (หญ้ามาตรฐานระดับโลก)</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-200 flex items-start gap-3">
+                            <div class="w-10 h-10 rounded-xl bg-arsenalGold/20 text-arsenalDarkRed flex items-center justify-center shrink-0 mt-0.5">
+                                <i class="fas fa-monument"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-900">รูปปั้นตำนานรอบสนาม</h4>
+                                <p class="text-sm text-gray-600">อองรี, เบิร์กแคมป์, อดัมส์, เวนเกอร์</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== 5. ส่วนแนะนำนักเตะดาวเด่น (Key Players) ==================== -->
+    <section id="players" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <!-- หัวข้อ Section -->
+            <div class="text-center max-w-3xl mx-auto mb-14">
+                <span class="text-arsenalRed font-bold tracking-widest uppercase text-sm">Star Gunners</span>
+                <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mt-2">ขุมกำลังนักเตะดาวเด่น (Key Players)</h2>
+                <div class="w-24 h-1.5 bg-gradient-to-r from-arsenalRed via-arsenalGold to-arsenalDarkRed mx-auto mt-4 rounded-full"></div>
+                <p class="text-gray-600 mt-4 text-base sm:text-lg">
+                    เหล่าขุนพลปืนใหญ่ที่เป็นหัวใจสำคัญในการขับเคลื่อนเกมรุกและเกมรับของอาร์เซนอลในยุคปัจจุบัน
+                </p>
+            </div>
+
+            <!-- Grid การ์ดนักเตะ 4 คน -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                
+                <!-- การ์ดที่ 1: Bukayo Saka -->
+                <div class="gunner-card bg-white rounded-3xl overflow-hidden border border-gray-200 shadow-md flex flex-col">
+                    <div class="bg-gradient-to-br from-arsenalRed to-arsenalDarkRed p-6 text-white relative">
+                        <span class="font-display text-6xl font-bold text-white/15 absolute right-4 top-2 select-none">#7</span>
+                        <div class="w-16 h-16 rounded-2xl bg-white/15 backdrop-blur-sm border border-arsenalGold flex items-center justify-center mb-4">
+                            <span class="font-display text-2xl font-bold text-arsenalGold">7</span>
+                        </div>
+                        <span class="px-2.5 py-0.5 bg-arsenalGold text-arsenalDark text-xs font-bold rounded-full uppercase">ปีกขวา (Right Winger)</span>
+                        <h3 class="text-xl font-bold mt-2">Bukayo Saka</h3>
+                        <p class="text-xs text-gray-200">บูกาโย ซากา • ทีมชาติอังกฤษ</p>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <p class="text-sm text-gray-600 leading-relaxed mb-4">
+                            "Starboy" ผลผลิตจากอะคาเดมี Hale End ของสโมสร โดดเด่นด้วยความเร็ว การเลี้ยงบอลที่เฉียบคม และการทำประตู/แอสซิสต์ที่สม่ำเสมอ
+                        </p>
+                        <div class="pt-3 border-t border-gray-100 flex items-center justify-between text-xs font-semibold text-gray-500">
+                            <span>เท้าถนัด: ซ้าย</span>
+                            <span class="text-arsenalRed">Hale End Academy</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- การ์ดที่ 2: Martin Ødegaard -->
+                <div class="gunner-card bg-white rounded-3xl overflow-hidden border border-gray-200 shadow-md flex flex-col">
+                    <div class="bg-gradient-to-br from-arsenalDarkRed to-gray-900 p-6 text-white relative">
+                        <span class="font-display text-6xl font-bold text-white/15 absolute right-4 top-2 select-none">#8</span>
+                        <div class="w-16 h-16 rounded-2xl bg-white/15 backdrop-blur-sm border border-arsenalGold flex items-center justify-center mb-4">
+                            <span class="font-display text-2xl font-bold text-arsenalGold">8</span>
+                        </div>
+                        <span class="px-2.5 py-0.5 bg-arsenalGold text-arsenalDark text-xs font-bold rounded-full uppercase">กัปตันทีม / กองกลางตัวรุก</span>
+                        <h3 class="text-xl font-bold mt-2">Martin Ødegaard</h3>
+                        <p class="text-xs text-gray-200">มาร์ติน โอเดการ์ด • ทีมชาตินอร์เวย์</p>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <p class="text-sm text-gray-600 leading-relaxed mb-4">
+                            กัปตันทีมจอมทัพผู้มีวิสัยทัศน์การจ่ายบอลระดับอัจฉริยะ ควบคุมจังหวะเกมแดนกลาง และเป็นผู้นำในการไล่เพรสซิ่งแดนบนของทีม
+                        </p>
+                        <div class="pt-3 border-t border-gray-100 flex items-center justify-between text-xs font-semibold text-gray-500">
+                            <span>เท้าถนัด: ซ้าย</span>
+                            <span class="text-arsenalBronze font-bold"><i class="fas fa-copyright mr-1"></i>Captain</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- การ์ดที่ 3: Declan Rice -->
+                <div class="gunner-card bg-white rounded-3xl overflow-hidden border border-gray-200 shadow-md flex flex-col">
+                    <div class="bg-gradient-to-br from-arsenalRed to-arsenalDarkRed p-6 text-white relative">
+                        <span class="font-display text-6xl font-bold text-white/15 absolute right-4 top-2 select-none">#41</span>
+                        <div class="w-16 h-16 rounded-2xl bg-white/15 backdrop-blur-sm border border-arsenalGold flex items-center justify-center mb-4">
+                            <span class="font-display text-2xl font-bold text-arsenalGold">41</span>
+                        </div>
+                        <span class="px-2.5 py-0.5 bg-arsenalGold text-arsenalDark text-xs font-bold rounded-full uppercase">กองกลางตัวรับ (Midfielder)</span>
+                        <h3 class="text-xl font-bold mt-2">Declan Rice</h3>
+                        <p class="text-xs text-gray-200">เดแคลน ไรซ์ • ทีมชาติอังกฤษ</p>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <p class="text-sm text-gray-600 leading-relaxed mb-4">
+                            ห้องเครื่องพลังไดนาโมที่แข็งแกร่งดุดัน ตัดเกมคู่แข่งได้อย่างแม่นยำ พร้อมการพาบอลตะลุยขึ้นหน้าและการยิงไกลที่ทรงพลัง
+                        </p>
+                        <div class="pt-3 border-t border-gray-100 flex items-center justify-between text-xs font-semibold text-gray-500">
+                            <span>เท้าถนัด: ขวา</span>
+                            <span class="text-arsenalRed">Box-to-Box Engine</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- การ์ดที่ 4: William Saliba -->
+                <div class="gunner-card bg-white rounded-3xl overflow-hidden border border-gray-200 shadow-md flex flex-col">
+                    <div class="bg-gradient-to-br from-arsenalDarkRed to-gray-900 p-6 text-white relative">
+                        <span class="font-display text-6xl font-bold text-white/15 absolute right-4 top-2 select-none">#2</span>
+                        <div class="w-16 h-16 rounded-2xl bg-white/15 backdrop-blur-sm border border-arsenalGold flex items-center justify-center mb-4">
+                            <span class="font-display text-2xl font-bold text-arsenalGold">2</span>
+                        </div>
+                        <span class="px-2.5 py-0.5 bg-arsenalGold text-arsenalDark text-xs font-bold rounded-full uppercase">กองหลังตัวกลาง (Defender)</span>
+                        <h3 class="text-xl font-bold mt-2">William Saliba</h3>
+                        <p class="text-xs text-gray-200">วิลเลียม ซาลิบา • ทีมชาติฝรั่งเศส</p>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <p class="text-sm text-gray-600 leading-relaxed mb-4">
+                            ปราการหลังจอมแกร่งที่มีความนิ่งเกินวัย อ่านเกมขาด มีความเร็วในการสกัดกั้น และออกบอลจากแนวหลังได้อย่างเยือกเย็น
+                        </p>
+                        <div class="pt-3 border-t border-gray-100 flex items-center justify-between text-xs font-semibold text-gray-500">
+                            <span>เท้าถนัด: ขวา</span>
+                            <span class="text-arsenalBronze font-bold">Rolls-Royce Defender</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== 6. ส่วนข้อมูลติดต่อผู้พัฒนาเว็บไซต์ (Developer Contact Section) ==================== -->
+    <section id="developer" class="py-20 bg-gradient-to-b from-gray-100 to-gray-200 border-t border-gray-300">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <!-- หัวข้อ Section -->
+            <div class="text-center max-w-3xl mx-auto mb-14">
+                <span class="inline-flex items-center gap-1.5 px-4 py-1 rounded-full bg-arsenalRed text-white text-xs font-bold uppercase tracking-wider shadow-sm">
+                    <i class="fas fa-heart text-arsenalGold"></i> Proud Gooner Developer
+                </span>
+                <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mt-3">ติดต่อผู้พัฒนาเว็บไซต์</h2>
+                <div class="w-24 h-1.5 bg-gradient-to-r from-arsenalRed via-arsenalGold to-arsenalDarkRed mx-auto mt-4 rounded-full"></div>
+                <p class="text-gray-600 mt-4">
+                    เว็บไซต์นี้พัฒนาขึ้นด้วยความรักและความหลงใหลในสโมสรฟุตบอลอาร์เซนอล หากมีข้อเสนอแนะหรือต้องการพูดคุยแลกเปลี่ยนเรื่องฟุตบอล สามารถติดต่อได้ทันที!
+                </p>
+            </div>
+
+            <div class="bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-200 grid grid-cols-1 lg:grid-cols-12">
+                
+                <!-- ข้อมูลโปรไฟล์ผู้พัฒนาด้านซ้าย -->
+                <div class="lg:col-span-5 bg-gradient-to-br from-arsenalRed via-arsenalDarkRed to-gray-900 p-8 sm:p-10 text-white flex flex-col justify-between relative overflow-hidden">
+                    <!-- ลายน้ำปืนใหญ่จางๆ -->
+                    <i class="fas fa-shield-alt text-9xl text-white/5 absolute -bottom-6 -right-6 pointer-events-none"></i>
+
+                    <div>
+                        <div class="w-20 h-20 rounded-2xl bg-white text-arsenalRed flex items-center justify-center text-3xl font-bold shadow-lg border-2 border-arsenalGold mb-6">
+                            <i class="fas fa-laptop-code"></i>
+                        </div>
+
+                        <span class="inline-block px-3 py-1 bg-arsenalGold text-arsenalDark text-xs font-bold rounded-full mb-3">
+                            Web Developer & Arsenal FC Fanclub
+                        </span>
+
+                        <h3 class="text-2xl sm:text-3xl font-bold leading-snug">
+                            ด.ญ.ณฐอร สุวรรณพิบูลย์
+                        </h3>
+                        <p class="text-arsenalGold font-medium text-sm mt-1">
+                            ผู้พัฒนาเว็บไซต์ • แฟนคลับพันธุ์แท้สโมสรอาร์เซนอล (FC)
+                        </p>
+
+                        <p class="text-gray-200 text-sm leading-relaxed mt-5">
+                            "สวัสดีค่ะ! หนูเป็นแฟนคลับของทีมปืนใหญ่ Arsenal FC ที่ชื่นชอบการออกแบบและพัฒนาเว็บไซต์ ตั้งใจสร้างเว็บไซต์นี้ขึ้นมาเพื่อถ่ายทอดเรื่องราวความภาคภูมิใจของทีมรักให้ทุกคนได้ชมกันค่ะ Come On You Gunners!"
+                        </p>
+                    </div>
+
+                    <!-- ช่องทางการติดต่อ -->
+                    <div class="space-y-4 mt-8 pt-6 border-t border-white/20 text-sm">
+                        <div class="flex items-center gap-3">
+                            <div class="w-9 h-9 rounded-lg bg-white/15 flex items-center justify-center text-arsenalGold shrink-0">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs text-gray-300">อีเมลติดต่อ</p>
+                                <p class="font-medium">nathaon.gunner@arsenalfan.th</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-3">
+                            <div class="w-9 h-9 rounded-lg bg-white/15 flex items-center justify-center text-arsenalGold shrink-0">
+                                <i class="fab fa-line"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs text-gray-300">Line ID / ชุมชนแฟนคลับ</p>
+                                <p class="font-medium">@Nathaon_GoonerFC</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-3">
+                            <div class="w-9 h-9 rounded-lg bg-white/15 flex items-center justify-center text-arsenalGold shrink-0">
+                                <i class="fas fa-map-pin"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs text-gray-300">ที่อยู่</p>
+                                <p class="font-medium">ประเทศไทย (Gooners Thailand)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ฟอร์มส่งข้อความติดต่อด้านขวา -->
+                <div class="lg:col-span-7 p-8 sm:p-10 bg-white">
+                    <h4 class="text-2xl font-bold text-gray-900 mb-2">ส่งข้อความถึงผู้พัฒนา</h4>
+                    <p class="text-sm text-gray-500 mb-6">กรอกข้อมูลด้านล่างเพื่อส่งกำลังใจ ติชมเว็บไซต์ หรือพูดคุยเรื่องทีมอาร์เซนอล</p>
+
+                    <!-- กล่องแจ้งเตือนเมื่อส่งข้อความสำเร็จ (ซ่อนไว้เริ่มต้น) -->
+                    <div id="form-success-msg" class="hidden mb-6 p-4 rounded-2xl bg-green-50 border border-green-300 text-green-800 flex items-start gap-3">
+                        <i class="fas fa-check-circle text-green-600 text-xl mt-0.5"></i>
+                        <div>
+                            <h5 class="font-bold text-sm">ส่งข้อความเรียบร้อยแล้ว! ขอบคุณค่ะ</h5>
+                            <p id="form-success-detail" class="text-xs mt-1 text-green-700"></p>
+                        </div>
+                    </div>
+
+                    <form id="contact-form" class="space-y-5">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                            <div>
+                                <label for="sender-name" class="block text-sm font-semibold text-gray-700 mb-1.5">ชื่อ-นามสกุล / ชื่อเล่น <span class="text-arsenalRed">*</span></label>
+                                <input type="text" id="sender-name" required placeholder="ระบุชื่อของคุณ"
+                                       class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-arsenalRed focus:ring-2 focus:ring-arsenalRed/20 outline-none transition-all text-sm">
+                            </div>
+                            <div>
+                                <label for="sender-email" class="block text-sm font-semibold text-gray-700 mb-1.5">อีเมลติดต่อกลับ <span class="text-arsenalRed">*</span></label>
+                                <input type="email" id="sender-email" required placeholder="example@email.com"
+                                       class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-arsenalRed focus:ring-2 focus:ring-arsenalRed/20 outline-none transition-all text-sm">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="sender-topic" class="block text-sm font-semibold text-gray-700 mb-1.5">หัวข้อที่ต้องการติดต่อ</label>
+                            <select id="sender-topic" 
+                                    class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-arsenalRed focus:ring-2 focus:ring-arsenalRed/20 outline-none transition-all text-sm bg-white">
+                                <option value="พูดคุยแลกเปลี่ยนเรื่องทีม Arsenal FC">⚽ พูดคุยแลกเปลี่ยนเรื่องทีม Arsenal FC</option>
+                                <option value="ติชมและแนะนำการออกแบบเว็บไซต์">💻 ติชมและแนะนำการออกแบบเว็บไซต์</option>
+                                <option value="ติดต่อสอบถามทั่วไป">📩 ติดต่อสอบถามทั่วไป</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label for="sender-message" class="block text-sm font-semibold text-gray-700 mb-1.5">ข้อความของคุณ <span class="text-arsenalRed">*</span></label>
+                            <textarea id="sender-message" rows="4" required placeholder="พิมพ์ข้อความถึง ด.ญ.ณฐอร สุวรรณพิบูลย์ ที่นี่..."
+                                      class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-arsenalRed focus:ring-2 focus:ring-arsenalRed/20 outline-none transition-all text-sm resize-none"></textarea>
+                        </div>
+
+                        <button type="submit" 
+                                class="w-full py-3.5 px-6 rounded-xl bg-arsenalRed hover:bg-arsenalDarkRed text-white font-bold text-base shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer">
+                            <i class="fas fa-paper-plane"></i>
+                            <span>ส่งข้อความถึงผู้พัฒนา</span>
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== Footer ด้านล่าง ==================== -->
+    <footer class="bg-arsenalDark text-gray-300 border-t-4 border-arsenalGold">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+                
+                <!-- โลโก้และสโลแกน -->
+                <div class="text-center md:text-left">
+                    <div class="flex items-center justify-center md:justify-start gap-2.5">
+                        <span class="w-3 h-3 rounded-full bg-arsenalRed inline-block"></span>
+                        <span class="font-display text-xl font-bold text-white tracking-wider uppercase">ARSENAL FC FAN SITE</span>
+                    </div>
+                    <p class="text-xs text-gray-400 mt-1">
+                        Victoria Concordia Crescit • Once a Gunner, Always a Gunner
+                    </p>
+                </div>
+
+                <!-- ลิงก์นำทางด่วน -->
+                <div class="flex flex-wrap justify-center gap-5 text-sm">
+                    <a href="#home" class="hover:text-arsenalGold transition-colors">หน้าแรก</a>
+                    <a href="#history" class="hover:text-arsenalGold transition-colors">ประวัติสโมสร</a>
+                    <a href="#stadium" class="hover:text-arsenalGold transition-colors">สนามเหย้า</a>
+                    <a href="#players" class="hover:text-arsenalGold transition-colors">นักเตะดาวเด่น</a>
+                    <a href="#developer" class="hover:text-arsenalGold transition-colors">ติดต่อผู้พัฒนา</a>
+                </div>
+
+                <!-- ปุ่มกลับขึ้นด้านบน -->
+                <a href="#home" aria-label="กลับขึ้นด้านบน" class="w-11 h-11 rounded-full bg-arsenalRed hover:bg-arsenalGold hover:text-arsenalDark text-white flex items-center justify-center shadow-md transition-all">
+                    <i class="fas fa-chevron-up"></i>
+                </a>
+            </div>
+
+            <div class="border-t border-gray-800 mt-8 pt-6 text-center text-xs text-gray-400 space-y-1">
+                <p>ออกแบบและพัฒนาเว็บไซต์โดย <strong class="text-white">ด.ญ.ณฐอร สุวรรณพิบูลย์</strong> (Arsenal FC Fanclub)</p>
+                <p>© 2026 Arsenal FC Fan Tribute Website. สร้างขึ้นเพื่อการศึกษาและแฟนคลับสโมสรอาร์เซนอล</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==================== JavaScript สำหรับเมนูมือถือและฟอร์มส่งข้อความ ==================== -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // 1. จัดการเปิด-ปิด Hamburger Menu บนมือถือ
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const menuIcon = document.getElementById('menu-icon');
+            const mobileLinks = document.querySelectorAll('.mobile-nav-link');
+
+            mobileMenuBtn.addEventListener('click', () => {
+                const isHidden = mobileMenu.classList.contains('hidden');
+                if (isHidden) {
+                    mobileMenu.classList.remove('hidden');
+                    menuIcon.classList.remove('fa-bars');
+                    menuIcon.classList.add('fa-times');
+                } else {
+                    mobileMenu.classList.add('hidden');
+                    menuIcon.classList.remove('fa-times');
+                    menuIcon.classList.add('fa-bars');
+                }
+            });
+
+            // ปิดเมนูมือถืออัตโนมัติเมื่อคลิกลิงก์
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    menuIcon.classList.remove('fa-times');
+                    menuIcon.classList.add('fa-bars');
+                });
+            });
+
+            // 2. จัดการการส่งฟอร์มติดต่อผู้พัฒนา (ใช้งานได้จริงพร้อมแสดงผลตอบรับ)
+            const contactForm = document.getElementById('contact-form');
+            const successMsgBox = document.getElementById('form-success-msg');
+            const successDetail = document.getElementById('form-success-detail');
+
+            contactForm.addEventListener('submit', (e) => {
+                e.preventDefault(); // ป้องกันการรีเฟรชหน้าเว็บ
+
+                const name = document.getElementById('sender-name').value.trim();
+                const email = document.getElementById('sender-email').value.trim();
+                const topic = document.getElementById('sender-topic').value;
+
+                // แสดงข้อความตอบรับสวยงามแทนการใช้ alert()
+                successDetail.textContent = `คุณ ${name} (${email}) ได้ส่งข้อความหัวข้อ "${topic}" ถึง ด.ญ.ณฐอร สุวรรณพิบูลย์ เรียบร้อยแล้วค่ะ!`;
+                successMsgBox.classList.remove('hidden');
+
+                // ล้างข้อมูลในฟอร์ม
+                contactForm.reset();
+
+                // เลื่อนให้เห็นกล่องแจ้งเตือนอย่างนุ่มนวล
+                successMsgBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            });
+        });
+    </script>
+</body>
+</html>
